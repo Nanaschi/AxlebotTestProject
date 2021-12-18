@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ResetButton : MonoBehaviour, IPointerDownHandler
-{
 
-    public event Action OnResetButtonClicked;
-
-    public void OnPointerDown(PointerEventData eventData)
+namespace UI {
+    public class ResetButton : MonoBehaviour, IPointerDownHandler
     {
-        print("OnResetButtonClicked");
-        OnResetButtonClicked?.Invoke();
-    }
 
+        public event Action OnResetButtonClicked;
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            OnResetButtonClicked?.Invoke();
+        }
+    }
 
 }

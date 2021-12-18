@@ -9,35 +9,33 @@ namespace Circle {
 [RequireComponent (typeof(Rigidbody2D))]
 public class CircleMovement : MonoBehaviour
 {
+
+        private Transform _endPoint;
+        private CursorBehaviour _cursorBehaviour;
+
         [SerializeField] private float _accelerationSpeed;
         [SerializeField] private float _startingSpeed;
         [SerializeField] private float _maximumSpeed;
 
-        private Transform _endPoint;
 
-        private CursorBehaviour _cursorBehaviour;
         private float _acceleratedSpeed;
         public float AcceleratedSpeed => _acceleratedSpeed;
 
         private bool _isInTheCursorZone;
+
         public event Action OnEndPointReached;
         public event Action<string> OnVelocityChanged;
         public void Initialize(EndPoint endPoint)
         {
-            print("I am initialized");
             _endPoint = endPoint.transform;
         }
 
-        public void SetMaximumSpeed(float setMaximumSpeed)
-        {
-            _maximumSpeed = setMaximumSpeed;
-        }
+    
         private void FixedUpdate()
     {
            if (!_isInTheCursorZone) MovingToTheDestination(_accelerationSpeed, _maximumSpeed, _endPoint);
            if (_isInTheCursorZone) MovingAway();
-            print(_acceleratedSpeed);
-            OnVelocityChanged("Current velocity is " + (Math.Round(_acceleratedSpeed, 4)).ToString());
+            OnVelocityChanged?.Invoke("Current speed is " + (Math.Round(_acceleratedSpeed, 3)).ToString());
             ReachedEndPoint();
     }
 
@@ -63,28 +61,9 @@ public class CircleMovement : MonoBehaviour
         {
             if (transform.position == _endPoint.position)
             {
-                print("ReachedEndPoint");
                 OnEndPointReached?.Invoke(); 
             }
         }
-
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            LeavingTheCursorZone(collision);
-        }
-
-        private void LeavingTheCursorZone(Collider2D collision)
-        {
-            if (collision.TryGetComponent<CursorBehaviour>(out var cursorBehaviour))
-            {
-                print("Work here");
-                //MovingToTheDestination(-_accelerationSpeed, _maximumSpeed, cursorBehaviour.transform); it works but attracts the ball to the centre
-                
-            }
-        }
-
-
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.TryGetComponent<CursorBehaviour>(out var cursorBehaviour))
@@ -102,6 +81,19 @@ public class CircleMovement : MonoBehaviour
                 _cursorBehaviour = null;
                 _isInTheCursorZone = false;
             }
+        }
+
+
+
+        public void SetMaximumSpeed(float setMaximumSpeed)
+        {
+            _maximumSpeed = setMaximumSpeed;
+        }
+
+
+        public void SetAccelerationSpeed(float maximumAccelerationSpeed)
+        {
+            _accelerationSpeed = maximumAccelerationSpeed;
         }
 
     }

@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent (typeof(TextMeshProUGUI))]
-public class TextMeshProTextData : MonoBehaviour
+
+namespace UI
 {
-    private TextMeshProUGUI _textMeshProUGUI;
 
-    private void Awake()
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class TextMeshProTextData : MonoBehaviour
     {
-        _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+        private TextMeshProUGUI _textMeshProUGUI;
+
+        private void Awake()
+        {
+            _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+        }
+
+
+        public void UpdateTheGUIText(string textToUpdate)
+        {
+            _textMeshProUGUI.text = textToUpdate;
+        }
+
     }
-
-
-    public void UpdateTheGUIText(string textToUpdate)
-    {
-        _textMeshProUGUI.text = textToUpdate;
-    }
-
 }

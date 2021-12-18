@@ -7,13 +7,6 @@ using UnityEngine;
 [RequireComponent (typeof(CircleCollider2D))] 
 public class CursorBehaviour : MonoBehaviour
 {
-    private float _radiusOfTheZone; 
-
-    private void Awake()
-    {
-        _radiusOfTheZone = transform.localScale.x / 2;
-    }
-
     private void FixedUpdate()
     {
         ZoneFollowingCursor();

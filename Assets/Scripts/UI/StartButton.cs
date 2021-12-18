@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
+namespace UI
+{
     public class StartButton : MonoBehaviour, IPointerDownHandler
     {
 
-        public event Action OnButtonClicked; 
+        public event Action OnButtonClicked;
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -17,3 +18,4 @@ using UnityEngine.EventSystems;
         }
     }
 
+}

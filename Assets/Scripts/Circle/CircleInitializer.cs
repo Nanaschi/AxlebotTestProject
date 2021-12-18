@@ -6,11 +6,10 @@ using UnityEngine;
 namespace Circle
 {
     [RequireComponent(typeof (CircleMovement))]
-    public class CircleInitializer : MonoBehaviour
+    public class CircleInitializer : MonoBehaviour 
+        //this class exists just in case in the future Circle has many components in addition to CircleMovement
     {
         private CircleMovement _circleMovement;
-        public CircleMovement CircleMovement => _circleMovement;
-
 
         public static event Action OnCircleSpawn;
 
