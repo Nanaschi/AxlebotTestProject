@@ -7,12 +7,11 @@ using UnityEngine;
 [RequireComponent (typeof(CircleCollider2D))] 
 public class CursorBehaviour : MonoBehaviour
 {
-    private CircleCollider2D _circleCollider2D;
+    private float _radiusOfTheZone; 
 
     private void Awake()
     {
-        _circleCollider2D = GetComponent<CircleCollider2D>();
-        print(RadiusOfTheZone());
+        _radiusOfTheZone = transform.localScale.x / 2;
     }
 
     private void FixedUpdate()
@@ -27,9 +26,9 @@ public class CursorBehaviour : MonoBehaviour
         transform.position = _mousePos;
     }
 
-    public float RadiusOfTheZone()
+    public void SetRadiusOfTheZone(float newRadius)
     {
-        return (transform.localScale.x)/2;
+        transform.localScale = new Vector2(newRadius, newRadius);
     }
 
 }

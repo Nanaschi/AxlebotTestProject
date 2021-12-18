@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent (typeof(TextMeshProUGUI))]
 public class TextMeshProTextData : MonoBehaviour
 {
-    TextMeshProUGUI _textMeshProUGUI;
+    private TextMeshProUGUI _textMeshProUGUI;
 
     private void Awake()
     {

@@ -28,12 +28,16 @@ public class CircleMovement : MonoBehaviour
             _endPoint = endPoint.transform;
         }
 
-    private void FixedUpdate()
+        public void SetMaximumSpeed(float setMaximumSpeed)
+        {
+            _maximumSpeed = setMaximumSpeed;
+        }
+        private void FixedUpdate()
     {
            if (!_isInTheCursorZone) MovingToTheDestination(_accelerationSpeed, _maximumSpeed, _endPoint);
            if (_isInTheCursorZone) MovingAway();
             print(_acceleratedSpeed);
-            OnVelocityChanged(_acceleratedSpeed.ToString());
+            OnVelocityChanged("Current velocity is " + (Math.Round(_acceleratedSpeed, 4)).ToString());
             ReachedEndPoint();
     }
 
@@ -101,4 +105,7 @@ public class CircleMovement : MonoBehaviour
         }
 
     }
+
+
+  
 }

@@ -12,19 +12,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] EndPoint _endPoint;
     [SerializeField] StartingPoint _transform;
 
+    [Header("Cursor")]
+    [SerializeField] private CursorBehaviour _cursorBehaviour;
 
     [Header("UI")]
     [SerializeField] private StartButton _startButton;
     [SerializeField] private ResetButton _resetButton;
+    [Space]
     [SerializeField] private RestartScreen _restartScreen;
     [SerializeField] private TextMeshProTextData _textMeshProTextData;
-
-        private void OnEnable()
+    [Space]
+    [SerializeField] private SliderBehaviour _maximumSpeedSlider;
+    [SerializeField] private SliderBehaviour _cursorRadiusSlider;
+    private void OnEnable()
         {
+
             _startButton.OnButtonClicked += SpawnTheCircle;
             _resetButton.OnResetButtonClicked += ResetTheLevel;
-
-
         }
 
         private void OnDisable()
@@ -40,8 +44,15 @@ public class GameManager : MonoBehaviour
             _circlePrefab.Initialize(_endPoint);
             _circlePrefab.OnEndPointReached += OpenRestartScreen;
             _circlePrefab.OnVelocityChanged += _textMeshProTextData.UpdateTheGUIText;
-        } 
+        }
 
+
+    private void FixedUpdate()
+    {
+        _circlePrefab.SetMaximumSpeed(_maximumSpeedSlider.GetSliderValue());
+        _cursorBehaviour.SetRadiusOfTheZone(_cursorRadiusSlider.GetSliderValue());
+        
+    }
 
     public void ResetTheLevel()
     {
